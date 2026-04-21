@@ -1,6 +1,6 @@
 # ML Project
 
-A machine learning project for [brief description, e.g., data analysis and modeling].
+A machine learning project for predicting survival of passengers trained on Titanic dataset using Logistic regression.
 
 ## Setup
 1. Clone the repo.
