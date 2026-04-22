@@ -95,6 +95,25 @@ ml-project/
 - Git history showing progress
 - Code in `src/` files (`data_processing.py`, `model.py`, `utils.py`)
 
+### Updated Teaching Workflow
+1. Keep the notebook as the primary learning environment until the first honest baseline model is complete.
+2. Treat Section 3 preprocessing as a feature-engineering prototype, not the final evaluation-ready pipeline.
+3. In Section 4 onward, split first and then learn any preprocessing statistics only from the training split.
+4. Use Logistic Regression as the first baseline because it is fast, interpretable, and teaches probability, log-odds, and coefficient interpretation.
+5. Refactor stable logic into `src/` only after the notebook workflow is statistically sound and easy to explain.
+
+### Current Notebook Status
+- Section 1 completed: basic exploration
+- Section 2 completed: visual analysis, now with emphasis on statistical interpretation of plots
+- Section 3 completed: preprocessing and feature engineering prototype on full training data
+- Section 4 started: supervised setup and train-validation split scaffolded with markdown explanations and code hints
+
+### Current Learning Priorities
+- Understand why splitting before fitted preprocessing prevents leakage
+- Build a baseline model before trying multiple algorithms
+- Compare exploratory preprocessing ideas against honest validation performance
+- Learn to explain each modeling step in statistical terms, not only in coding terms
+
 ---
 
 ## Key Git Commands Reference
