@@ -126,4 +126,4 @@ logs/
 #results/
 # Notebooks (if you want to ignore checkpoints)
 # notebooks/.ipynb_checkpoints/
-SESSION_CONTEXT_BACKUP.md
+/SESSION_CONTEXT_BACKUP.md
