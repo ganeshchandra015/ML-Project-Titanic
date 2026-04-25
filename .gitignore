@@ -123,6 +123,6 @@ dmypy.json
 # Logs
 logs/
 # Results (temporary outputs)
-results/
+#results/
 # Notebooks (if you want to ignore checkpoints)
 # notebooks/.ipynb_checkpoints/
