@@ -65,6 +65,58 @@ The model bundle stores:
 
 This is enough to support repeatable inference on Titanic-format test data.
 
+### Make a Kaggle Submission From an Existing Bundle
+
+If you have already trained the project once and only want to recreate predictions from the saved pickle bundle:
+
+```bash
+python -m src.pipeline --mode predict_submission --bundle-path models/titanic_logistic_bundle.pkl --input-path data/raw/test.csv --output-path results/submission_from_bundle.csv
+```
+
+Use this when the input file has the same raw Titanic-style schema as the original Kaggle test set and you want a two-column submission output.
+
+### Score a New Raw Data Source
+
+If you want to use the trained pickle file on a new raw CSV source, run:
+
+```bash
+python -m src.pipeline --mode score_data --bundle-path models/titanic_logistic_bundle.pkl --input-path data/raw/test.csv --output-path results/scored_test.csv --id-column PassengerId
+```
+
+This creates a scored table with:
+
+1. An identifier column.
+2. A predicted class column.
+3. A predicted probability column.
+
+Important requirement:
+The new source must still contain the raw columns expected by the preprocessing pipeline, such as `Pclass`, `Sex`, `Age`, `Fare`, `Embarked`, `SibSp`, `Parch`, `Name`, `Ticket`, and `Cabin`.
+
+If your new source uses different column names or a different schema, you must map it into the Titanic raw schema before scoring.
+
+### What the Pickle File Actually Does
+
+The pickle file is not just trained coefficients. It is the full inference contract for the project:
+
+1. It remembers which workflow won.
+2. It stores the preprocessing rules learned from training data.
+3. It stores the exact encoded feature schema expected by the model.
+4. It stores the trained logistic regression object.
+
+That is why loading only coefficients would be insufficient. The model also needs the same transformations and the same final column layout.
+
+### How To Adapt a Truly New Source
+
+For a new source outside Kaggle, follow this sequence:
+
+1. Start with raw passenger-level data.
+2. Rename or map columns so they match the Titanic raw schema expected by the bundle.
+3. Save that mapped dataset as CSV.
+4. Run `score_data` mode with the saved bundle.
+5. Inspect both predicted class and predicted probability.
+
+If the source does not represent Titanic-style passengers, then this trained model is not appropriate and should not be reused without retraining.
+
 ## Kaggle Next Steps
 
 1. Run the notebook end to end and confirm the chosen workflow is still the best validated option.
